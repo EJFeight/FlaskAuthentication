@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block PageName %}User Login{% endblock %}
+
+{% block Body %}
+<div style="text-align: center;">
+    <form action="{{ url_for('login')}}" method='POST'>
+        <input type='text' name='username' placeholder='username'/>
+        <input type='password' name='password' placeholder='password'/>
+        <input type='submit' value='Login'/>
+    </form>
+</div>
+{% endblock %}

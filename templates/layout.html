@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Login Example</title>
+</head>
+<body>
+
+<p>
+    <a href="/">Home</a>&emsp;
+    <a href="/public">Public</a>&emsp;
+    <a href="/protected">Protected</a>&emsp;
+    <a href="/login">Login</a>&emsp;
+    <a href="/logout">Logout</a>
+</p>
+
+<h1 style="text-align: center">
+    {% block PageName %}{% endblock %}
+</h1>
+<br>
+<p>
+    Current User: {{ username }}
+</p>
+{% block Body %}{% endblock %}
+</body>
+</html>
