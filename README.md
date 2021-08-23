@@ -17,11 +17,13 @@ The bulk of this work is based on documentation and source code for the flask_lo
 can be found at:
 https://github.com/maxcountryman/flask-login
 
-The application is pretty “bare bones.” I have added comments in the app.py file that will hopefully explain all you need to know to get native Flask authentication running on your project. As this is
-not intended as an example of HTML5 of Jinja templates, the html files are very basic with no comments. The idea was just to provide a framework for testing the Flask application.
+The application is pretty “bare bones.” I have added comments in the app.py file that will hopefully
+explain all you need to know to get native Flask authentication running on your project. As this is
+not intended as an example of HTML5 of Jinja templates, the html files are very basic with no comments.
+The idea was just to provide a framework for testing the Flask application.
 
 If you have any questions or comments, please feel free to contact me at: ejfeight@hotmail.com.
-I’m not an expert by any means, but I would appreciate you feedback and I will be happy to provide
+I’m not an expert by any means, but I would appreciate your feedback and I will be happy to provide
 any assistance I can.
 
 I hope you find this helpful.
