@@ -1,24 +1,30 @@
 # This application is based on the GitHub repo for flask-login:
 # https://github.com/maxcountryman/flask-login
 
-import flask
-import flask_login
-from flask import request, render_template
+# These are the minimum components from flask needed for this demo.
+from flask import Flask, request, render_template
 
+# This provides the user authentication framework.
+import flask_login
+
+# These components are for generating and comparing password hashes.
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-# Create and configure the application
-app = flask.Flask(__name__)
+# Create the application
+app = Flask(__name__)
+# A secret key must be set to allow flask_login to access the session dictionary.
 app.secret_key = 'use your own cryptic secret here'
 
-# Create and Configure the login manager
+# Create and Configure the login manager.
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
 
 # User information is stored in a dictionary for purposes of this example.
 # In production this can be replaced by a db query or ORM and the hashed value of the passwords would be stored.
+# For purposes of this example I am encrypting teh password inside the dictionary so it is clear what the password
+# actually is. For example: user 'foobar' has a password of 'foopassword'
 users = {
     'foobar': {'firstname': 'foo', 'lastname': 'bar', 'password': generate_password_hash('foopassword')},
     'barfoo': {'firstname': 'bar', 'lastname': 'foo', 'password': generate_password_hash('barpassword')}
@@ -37,6 +43,7 @@ class User(flask_login.UserMixin):
 
 
 # user_loader callback
+# This is for users that are already logged in
 @login_manager.user_loader
 def user_loader(username):
     if username not in users:
@@ -48,6 +55,7 @@ def user_loader(username):
 
 
 # request_loader callback
+# This is for a new user login
 @login_manager.request_loader
 def request_loader(my_request):
     username = my_request.form.get('username')
@@ -80,9 +88,10 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
-    if flask.request.method == 'GET':
+    if request.method == 'GET':
         return render_template('login.html', username=current_user())
 
+    # This section executes if the request method is POST
     # Get username from form
     username = request.form['username']
     password = request.form['password']
@@ -92,8 +101,10 @@ def login():
         user = User()
         user.id = username
         flask_login.login_user(user)
+        # Display the successful login page
         return render_template('good_login.html', username=current_user())
     else:
+        # Display the failed login page
         return render_template('bad_login.html', username=current_user())
 
 
